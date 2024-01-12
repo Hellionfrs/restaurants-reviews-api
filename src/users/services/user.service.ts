@@ -24,3 +24,11 @@ export async function createUser(data: UserParams) {
     throw error;
   }
 }
+
+export async function getUsers(): Promise<User[] | undefined> {
+  try {
+    return await userDB.getUsers()
+  } catch (error) {
+    throw error
+  }
+}
