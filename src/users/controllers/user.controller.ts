@@ -1,6 +1,6 @@
 import { userSchema } from './../models/user.model';
 import { NextFunction, Request, Response } from "express"
-import { getUsers, updateUser } from "../services/user.service"
+import { deleteUser, getUsers, updateUser } from "../services/user.service"
 import ExpressReviewsError from "../../utils/error/ExpressReviewsError"
 import bcrypt from "bcrypt";
 
@@ -29,6 +29,16 @@ export const updateUserController = async (req: Request, res: Response, next: Ne
     const updatedUser = await updateUser(userId, data)
     res.status(201).json({ok:true, message: "Actualizacion exitosa", data: updatedUser})
   } catch (error){
+    next(error)
+  }
+}
+
+export const deleteUserController = async (req: Request, res: Response, next:NextFunction) => {
+  try {
+    const userId = Number(req.params['id'])
+    const deletedUser = await deleteUser(userId)
+    res.status(200).json({ok:true, message: "Eliminacion exitosa", data: deletedUser})
+  } catch (error) {
     next(error)
   }
 }

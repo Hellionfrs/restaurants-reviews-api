@@ -82,3 +82,16 @@ export async function updateUser(userId: number, data: Partial<UserParams>): Pro
     );
   }
 }
+
+export async function deleteUser(userId: number) {
+  try {
+    return (await query("DELETE FROM users WHERE id= $1 RETURNING *;", [userId])).rows[0]
+  } catch (error) {
+    throw new ExpressReviewsError(
+      "usuario no existe",
+      403,
+      "data error",
+      error
+    );
+  }
+}
