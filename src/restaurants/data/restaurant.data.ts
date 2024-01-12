@@ -19,7 +19,6 @@ export async function getRestaurants(): Promise<Restaurant[]> {
 
 export async function getRestaurantById(id: number): Promise<Restaurant> {
   try {
-    console.log("ENTRO A GET: con ", id);
     return (await query("SELECT * FROM restaurants WHERE id = $1;", [id]))
       .rows[0];
   } catch (error) {
@@ -69,7 +68,6 @@ export async function createRestaurant(
       )
     ).rows[0];
   } catch (error) {
-    console.log("ERROR EN DATA PARA CREAR");
     throw new ExpressReviewsError(
       "Error al crear nuevo restaurante",
       500,
@@ -85,7 +83,6 @@ export async function updateRestaurant(
   id: number
 ): Promise<Restaurant> {
   let dataStringify = StringifyObject(data);
-  console.log("dataStringify: ", dataStringify);
 
   try {
     return (
