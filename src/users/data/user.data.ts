@@ -42,3 +42,7 @@ export async function createUser(
     )
   ).rows[0];
 }
+
+export async function getUsers(): Promise<User[]> {
+  return (await query("SELECT * FROM users")).rows
+}
