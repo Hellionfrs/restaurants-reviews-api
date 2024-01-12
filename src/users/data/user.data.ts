@@ -19,7 +19,27 @@ export async function getUserByNameAPassword(
   password: string
 ): Promise<User | undefined> {
   try {
-    return (await query("SELECT * FROM users WHERE username = $1 AND password = $2", [username, password]))
+    return (
+      await query("SELECT * FROM users WHERE username = $1 AND password = $2", [
+        username,
+        password,
+      ])
+    ).rows[0];
+  } catch (error) {
+    throw new ExpressReviewsError(
+      "usuario no existe",
+      403,
+      "data error",
+      error
+    );
+  }
+}
+
+export async function getUserByName(
+  username: string
+): Promise<User | undefined> {
+  try {
+    return (await query("SELECT * FROM users WHERE username = $1;", [username]))
       .rows[0];
   } catch (error) {
     throw new ExpressReviewsError(
@@ -44,5 +64,5 @@ export async function createUser(
 }
 
 export async function getUsers(): Promise<User[]> {
-  return (await query("SELECT * FROM users")).rows
+  return (await query("SELECT * FROM users")).rows;
 }

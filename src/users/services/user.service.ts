@@ -10,14 +10,30 @@ export async function getUser(id: number): Promise<User | undefined> {
   }
 }
 
+export async function getUserByNameAPassword(username:string, password:string): Promise<User> {
+  try {
+    const user = await userDB.getUserByNameAPassword(username, password)
+    if (!user) {
+      throw new ExpressReviewsError(
+        "credenciales invalidad",
+        403,
+        "Error at controllers"
+      );
+    }
+    return user
+  } catch (error){
+    throw error
+  }
+}
 export async function createUser(data: UserParams) {
   const { username, password, role } = data;
 
   try {
-    const user = await userDB.getUserByNameAPassword(username, password);
+    const user = await userDB.getUserByName(username);// By name
     if (user) {
       throw new ExpressReviewsError("usuario ya existe", 403, "service error");
     }
+
     const userCreated = await userDB.createUser(username, password, role);
     return userCreated;
   } catch (error) {
