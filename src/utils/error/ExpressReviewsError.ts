@@ -4,7 +4,7 @@ export default class ExpressReviewsError extends Error{
     details:string;
     timesTamp: string;
     techInfo: string;
-    constructor(message: string, statusCode:number, type: string, error: any, details?: string){
+    constructor(message: string, statusCode:number, type: string, error?: any, details?: string){
         super(message);
         this.statusCode = statusCode || 500;
         this.type = type || "GeneralError";
