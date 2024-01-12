@@ -49,3 +49,11 @@ export async function updateRestaurant(
     throw error;
   }
 }
+
+export async function deleteRestaurant(id: number): Promise<Restaurant> {
+  try {
+    return await restaurantDB.deleteRestaurant(id);
+  } catch (error) {
+    throw error;
+  }
+}

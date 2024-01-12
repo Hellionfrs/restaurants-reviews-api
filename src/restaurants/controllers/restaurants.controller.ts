@@ -120,3 +120,50 @@ export async function updateRestaurant(
     }
   }
 }
+
+export async function deleteRestaurant(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  try {
+    const restaurantId = req.params["id"];
+    const restaurant = await restaurantService.getRestaurantById(
+      parseInt(restaurantId)
+    );
+
+    if (!restaurant) {
+      next(
+        new ExpressReviewsError(
+          "El restaurante no existe",
+          500,
+          "ControllerError",
+          Error
+        )
+      );
+    }
+
+    const deletedRestaurant = await restaurantService.deleteRestaurant(
+      parseInt(restaurantId)
+    );
+
+    res.status(200).json({
+      ok: true,
+      message: "Restaurante eliminado exitosamente",
+      data: deletedRestaurant,
+    });
+  } catch (error) {
+    if (error instanceof ExpressReviewsError) {
+      next(error);
+    } else {
+      next(
+        new ExpressReviewsError(
+          "El restaurante no se pudo eliminar ",
+          500,
+          "ControllerError",
+          error
+        )
+      );
+    }
+  }
+}

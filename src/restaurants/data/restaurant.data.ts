@@ -101,3 +101,19 @@ export async function updateRestaurant(
     );
   }
 }
+
+export async function deleteRestaurant(id: number): Promise<Restaurant> {
+  try {
+    return (
+      await query(`DELETE FROM restaurants WHERE id = $1 RETURNING *;`, [id])
+    ).rows[0];
+  } catch (error) {
+    throw new ExpressReviewsError(
+      "Error al borrar el restaurante",
+      500,
+      "DataError",
+      error,
+      "deleteRestaurant"
+    );
+  }
+}
