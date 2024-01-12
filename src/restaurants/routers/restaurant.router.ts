@@ -1,6 +1,7 @@
 import express from "express";
 import {
   createRestaurant,
+  deleteRestaurant,
   getRestaurants,
   updateRestaurant,
 } from "../controllers/restaurants.controller";
@@ -24,5 +25,6 @@ restaurantsRouter.patch(
   ValidateRequestMiddleware(restaurantUpdateSchema),
   updateRestaurant
 );
+restaurantsRouter.delete("/:id", deleteRestaurant);
 
 export default restaurantsRouter;
