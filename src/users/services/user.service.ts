@@ -10,14 +10,30 @@ export async function getUser(id: number): Promise<User | undefined> {
   }
 }
 
+export async function getUserByName(name: string): Promise<User> {
+  try {
+    const user = await userDB.getUserByName(name)
+    if (!user) {
+      throw new ExpressReviewsError(
+        "credenciales invalidas",
+        403,
+        "Error at service"
+      );
+    }
+    return user
+  } catch (error) {
+    throw error;
+  }
+}
+
 export async function getUserByNameAPassword(username:string, password:string): Promise<User> {
   try {
     const user = await userDB.getUserByNameAPassword(username, password)
     if (!user) {
       throw new ExpressReviewsError(
-        "credenciales invalidad",
+        "credenciales invalidas",
         403,
-        "Error at controllers"
+        "Error at service"
       );
     }
     return user
@@ -44,6 +60,19 @@ export async function createUser(data: UserParams) {
 export async function getUsers(): Promise<User[] | undefined> {
   try {
     return await userDB.getUsers()
+  } catch (error) {
+    throw error
+  }
+}
+
+export async function updateUser(userId: number, data:Partial<UserParams>) {
+  try {
+    const user = await userDB.getUser(userId)
+    if (!user) {
+      throw (new ExpressReviewsError("usuario no existe", 403, "service error"))
+    }
+    const updatedUser = await userDB.updateUser(userId, data) 
+    return updatedUser
   } catch (error) {
     throw error
   }

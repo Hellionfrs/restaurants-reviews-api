@@ -1,6 +1,7 @@
 import { query } from "../../db";
 import ExpressReviewsError from "../../utils/error/ExpressReviewsError";
-import { User } from "../models/user.model";
+import { objStringify } from "../../utils/users.utils";
+import { User, UserParams } from "../models/user.model";
 
 export async function getUser(id: number): Promise<User | undefined> {
   try {
@@ -65,4 +66,19 @@ export async function createUser(
 
 export async function getUsers(): Promise<User[]> {
   return (await query("SELECT * FROM users")).rows;
+}
+
+
+export async function updateUser(userId: number, data: Partial<UserParams>): Promise<User[]>{
+  try {
+    let dataStringify = objStringify(data)
+    return (await query(`UPDATE users SET ${dataStringify} WHERE id = $1 RETURNING *;`, [userId])).rows[0]
+  } catch (error) {
+    throw new ExpressReviewsError(
+      "usuario no existe",
+      403,
+      "data error",
+      error
+    );
+  }
 }
