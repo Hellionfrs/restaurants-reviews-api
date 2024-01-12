@@ -1,6 +1,5 @@
 import express from "express";
-import { authRouter } from "./users/controllers/user-auth.controller";
-import { allowedNodeEnvironmentFlags } from "process";
+import { authRouter } from "./users/routers/auth.router";
 
 const app = express();
 const port = 5500;
