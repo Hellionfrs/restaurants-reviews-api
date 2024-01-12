@@ -35,19 +35,6 @@ export async function createRestaurant(
 ) {
   try {
     const dataRestaurant = req.body;
-    const restaurantId = await restaurantService.getRestaurantIdByData(
-      dataRestaurant
-    );
-    if (restaurantId) {
-      next(
-        new ExpressReviewsError(
-          "El restaurante ya existe",
-          418,
-          "ControllerError",
-          Error
-        )
-      );
-    }
     const newRestaurant = await restaurantService.createRestaurant(
       dataRestaurant
     );
@@ -79,27 +66,11 @@ export async function updateRestaurant(
 ) {
   try {
     const restaurantId = req.params["id"];
-    const restaurant = await restaurantService.getRestaurantById(
-      parseInt(restaurantId)
-    );
-
-    if (!restaurant) {
-      next(
-        new ExpressReviewsError(
-          "El restaurante no existe",
-          500,
-          "ControllerError",
-          Error
-        )
-      );
-    }
-
     const dataRestaurant = req.body;
     const updatedRestaurant = await restaurantService.updateRestaurant(
       dataRestaurant,
       parseInt(restaurantId)
     );
-
     res.status(201).json({
       ok: true,
       message: "Restaurante actualizado exitosamente",
@@ -127,26 +98,10 @@ export async function deleteRestaurant(
   next: NextFunction
 ) {
   try {
-    const restaurantId = req.params["id"];
-    const restaurant = await restaurantService.getRestaurantById(
-      parseInt(restaurantId)
-    );
-
-    if (!restaurant) {
-      next(
-        new ExpressReviewsError(
-          "El restaurante no existe",
-          500,
-          "ControllerError",
-          Error
-        )
-      );
-    }
-
+    const restaurantId = parseInt(req.params["id"]);
     const deletedRestaurant = await restaurantService.deleteRestaurant(
-      parseInt(restaurantId)
+      restaurantId
     );
-
     res.status(200).json({
       ok: true,
       message: "Restaurante eliminado exitosamente",
