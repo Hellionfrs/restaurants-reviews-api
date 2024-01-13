@@ -13,8 +13,8 @@ export const userSchema = z.object({
   }),
   password: z
     .string({
-      required_error: "Email es requerido",
-      invalid_type_error: "Email debe ser un string",
+      required_error: "Password es requerido",
+      invalid_type_error: "Password debe ser un string",
     })
     .min(8, "Password debe tener almenos 8 caracteres"),
   role: RoleEnum.optional().default("user"),
@@ -27,8 +27,8 @@ export const userSchemaLogin = z.object({
   }),
   password: z
     .string({
-      required_error: "Email es requerido",
-      invalid_type_error: "Email debe ser un string",
+      required_error: "Password es requerido",
+      invalid_type_error: "Password debe ser un string",
     })
     .min(8, "Password debe tener almenos 8 caracteres"),
 });
