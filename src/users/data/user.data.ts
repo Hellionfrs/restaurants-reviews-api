@@ -69,7 +69,7 @@ export async function getUsers(): Promise<User[]> {
 }
 
 
-export async function updateUser(userId: number, data: Partial<UserParams>): Promise<User>{
+export async function updateUser(userId: number, data: Partial<UserParams>): Promise<User> {
   try {
     let dataStringify = objStringify(data)
     return (await query(`UPDATE users SET ${dataStringify} WHERE id = $1 RETURNING *;`, [userId])).rows[0]
@@ -93,5 +93,14 @@ export async function deleteUser(userId: number) {
       "data error",
       error
     );
+  }
+}
+
+export async function getUserById(id: number) {
+  try {
+    const result = await query("SELECT * FROM USERS U WHERE U.ID=$1;", [id.toString()]);
+    return result.rows[0]
+  } catch (error) {
+    throw new ExpressReviewsError("Error al conseguir cliente", 404, "DataError", error);
   }
 }
