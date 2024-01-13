@@ -65,6 +65,15 @@ class ReviewData {
 
   };
 
+  async getReviewsByRestaurant(id: string):Promise<DataCreateReviewInterface[]>{
+    try{
+      const result = await query("SELECT * FROM REVIEWS WHERE RESTAURANTID=$1;",[id]);
+      return result.rows as DataCreateReviewInterface[]
+    }catch(error){
+      throw new ExpressReviewsError("Error al listar las reseñas", 404, "DataError", error);
+    }
+  }
+
 };
 
 
