@@ -68,7 +68,7 @@ export async function getUsers(): Promise<User[] | undefined> {
   }
 }
 
-export async function updateUser(userId: number, data: Partial<UserParams>) {
+export async function updateUser(userId: number, data: Partial<UserParams>): Promise<User> {
   try {
     const user = await userDB.getUser(userId);
     if (!user) {

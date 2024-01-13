@@ -69,7 +69,7 @@ export async function getUsers(): Promise<User[]> {
 }
 
 
-export async function updateUser(userId: number, data: Partial<UserParams>): Promise<User[]>{
+export async function updateUser(userId: number, data: Partial<UserParams>): Promise<User>{
   try {
     let dataStringify = objStringify(data)
     return (await query(`UPDATE users SET ${dataStringify} WHERE id = $1 RETURNING *;`, [userId])).rows[0]

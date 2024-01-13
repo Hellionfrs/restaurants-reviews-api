@@ -16,7 +16,7 @@ export const userSchema = z.object({
       required_error: "Email es requerido",
       invalid_type_error: "Email debe ser un string",
     })
-    .min(6, "Password debe tener almenos 6 caracteres"),
+    .min(8, "Password debe tener almenos 8 caracteres"),
   role: RoleEnum.optional().default("user"),
 });
 
@@ -30,7 +30,7 @@ export const userSchemaLogin = z.object({
       required_error: "Email es requerido",
       invalid_type_error: "Email debe ser un string",
     })
-    .min(6, "Password debe tener almenos 6 caracteres"),
+    .min(8, "Password debe tener almenos 8 caracteres"),
 });
 export type UserParams = z.infer<typeof userSchema>;
 export type UserParamsLogin = z.infer<typeof userSchemaLogin>;

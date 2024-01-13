@@ -51,7 +51,7 @@ const signUpController = async (
     const newUser = await createUser(newUserParsed);
     res
       .status(201)
-      .json({ ok: true, message: "Register existoso", data: newUser });
+      .json({ ok: true, message: "Register existoso", data: { username: newUser.username, role: newUser.role} });
   } catch (error) {
     next(error);
   }

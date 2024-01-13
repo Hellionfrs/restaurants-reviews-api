@@ -3,7 +3,7 @@ import { adminAuthorizacion, authenticateHandler } from "../../middlewares/auth.
 import { deleteUserController, getUserController, updateUserController } from "../controllers/user.controller";
 const userRouter = express.Router();
 
-userRouter.get("/", authenticateHandler, getUserController);
+userRouter.get("/", authenticateHandler, adminAuthorizacion, getUserController);
 userRouter.patch("/:id",authenticateHandler, adminAuthorizacion, updateUserController)
 userRouter.delete("/:id", authenticateHandler, adminAuthorizacion, deleteUserController)
 export {userRouter}

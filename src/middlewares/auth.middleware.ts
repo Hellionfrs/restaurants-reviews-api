@@ -48,10 +48,11 @@ export const adminAuthorizacion = async (
   next: NextFunction
 ) => {
   try {
+    console.log(req.userRole)
     if (req.userRole === "admin") {
       next();
     } else {
-      throw new ExpressReviewsError("no autorizado", 401, "middleware auth");
+      throw new ExpressReviewsError("No autorizado", 401, "Error de validacion");
     }
   } catch (error) {
     next(error);
