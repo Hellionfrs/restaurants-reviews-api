@@ -38,6 +38,23 @@ export const authenticateHandler = async (
     req.userRole = payload.userRole;
     next();
   } catch (error) {
-    new ExpressReviewsError("no autorizado", 401, "controller error");
+    next(error);
+  }
+};
+
+export const adminAuthorizacion = async (
+  req: Request,
+  _res: Response,
+  next: NextFunction
+) => {
+  try {
+    console.log(req.userRole)
+    if (req.userRole === "admin") {
+      next();
+    } else {
+      throw new ExpressReviewsError("No autorizado", 401, "Error de validacion");
+    }
+  } catch (error) {
+    next(error);
   }
 };
