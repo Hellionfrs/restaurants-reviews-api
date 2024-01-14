@@ -8,9 +8,9 @@ import { adminAuthorizacion, authenticateHandler } from '../../middlewares/auth.
 
 const reviewRestaurantRouter = express.Router();
 
-reviewRestaurantRouter.get("/restaurant/:id/reviews", reviewsControllers.ListReview);
-reviewRestaurantRouter.post("/restaurant/:id/reviews", authenticateHandler, ValidateRequestMiddleware(CreateReviewRestaurantSchema), reviewsControllers.CreateReview);
-reviewRestaurantRouter.patch("/reviews/:id", authenticateHandler, ValidateRequestMiddleware(UpdateReviewSchema), reviewsControllers.UpdateReview);
+reviewRestaurantRouter.get("/restaurants/:id/reviews", reviewsControllers.ListReview);
+reviewRestaurantRouter.post("/restaurants/:id/reviews", authenticateHandler, ValidateRequestMiddleware(CreateReviewRestaurantSchema), reviewsControllers.CreateReview);
+reviewRestaurantRouter.patch("/reviews/:id", authenticateHandler, ValidateRequestMiddleware(UpdateReviewSchema.partial()), reviewsControllers.UpdateReview);
 reviewRestaurantRouter.delete("/reviews/:id", authenticateHandler, adminAuthorizacion, reviewsControllers.DeleteReview)
 
 

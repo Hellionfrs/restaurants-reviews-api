@@ -28,6 +28,13 @@ class ReviewServices {
     async updateReview(data: InUpdateReviewInterface, id: number, idUser: number | undefined, role: string | undefined): Promise<DataCreateReviewInterface> {
         try {
             if (typeof id === 'undefined' || typeof role === "undefined") throw new ExpressReviewsError("Usuario no valido", 403, "ValidationError");
+            if (Object.keys(data).length === 0) throw new ExpressReviewsError("Json incorrecto", 403, "ValidationError");
+
+            for (const key in data) {
+                if (!["score", "title", "description"].includes(key)) {
+                    throw new ExpressReviewsError("Json incorrecto", 403, "ValidationError");
+                }
+            }
             const reviewOld: DataCreateReviewInterface = await reviewData.getReviewById(id);
             if (!reviewOld) throw new ExpressReviewsError("Reseña no encontrada", 401, "ValidationError");
             if (role === "admin") {

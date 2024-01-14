@@ -27,7 +27,7 @@ export default function errorHandler(
       },
     });
   } else {
-    res.status(500).json({
+    res.status(400).json({
       ok: false,
       error: {
         message: "Error interno del servidor",
