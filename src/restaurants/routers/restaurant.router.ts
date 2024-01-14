@@ -11,20 +11,23 @@ import {
   restaurantUpdateSchema,
 } from "../models/restaurant.model";
 import { ValidateRequestMiddleware } from "../../middlewares/validated.request.middleware";
+import { authenticateHandler } from "../../middlewares/auth.middleware";
 
 const restaurantsRouter = express.Router();
 
 restaurantsRouter.get("/", getRestaurants);
 restaurantsRouter.post(
   "/",
+  authenticateHandler,
   ValidateRequestMiddleware(restaurantSchema),
   createRestaurant
 );
 restaurantsRouter.patch(
   "/:id",
+  authenticateHandler,
   ValidateRequestMiddleware(restaurantUpdateSchema),
   updateRestaurant
 );
-restaurantsRouter.delete("/:id", deleteRestaurant);
+restaurantsRouter.delete("/:id", authenticateHandler, deleteRestaurant);
 
 export default restaurantsRouter;
