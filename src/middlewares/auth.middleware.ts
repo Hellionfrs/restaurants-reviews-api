@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import ExpressReviewsError from "../utils/error/ExpressReviewsError";
+import { jwtSecret } from "../utils/const.utils";
 
 declare global {
   namespace Express {
@@ -10,7 +11,6 @@ declare global {
     }
   }
 }
-const jwtSecret = "ultra-secret";
 
 export const authenticateHandler = async (
   req: Request,

@@ -4,8 +4,8 @@ import { NextFunction, Request, Response } from "express";
 import { createUser, getUserByName } from "../services/user.service";
 import { userSchema } from "../models/user.model";
 import ExpressReviewsError from "../../utils/error/ExpressReviewsError";
+import { jwtSecret } from "../../utils/const.utils";
 
-const jwtSecret = "ultra-secret";
 
 const loginController = async (
   req: Request,
