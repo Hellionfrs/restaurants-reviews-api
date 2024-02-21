@@ -1,9 +1,8 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/LFd7ICO0)
 # Proyecto: API de Reseñas de Restaurantes
 
 ## Acerca del proyecto
 
-El desafío consiste en crear una RESTful API para un sistema de reseñas de restaurantes. Los usuarios pueden registrar diferentes restaurantes, añadir reseñas y puntuaciones. Habrá roles de usuario que permitirán distintos niveles de acceso y funcionalidades.
+RESTful API para un sistema de reseñas de restaurantes. Los usuarios pueden registrar diferentes restaurantes, añadir reseñas y puntuaciones. Hay roles de usuario que permitirán distintos niveles de acceso y funcionalidades.
 
 ## Esquema de Base de Datos
 
@@ -232,33 +231,14 @@ Los mensajes de error deben mantener una estructura estándar en todos los endpo
 }
 ```
 
-## Requerimientos técnicos
+## Features técnicos
 
-- Utilizar `Express.js` con `TypeScript`.
-- Implementar una arquitectura de 3 capas.
-- Organizar la API utilizando rutas y routers modulares.
-- Implementar middlewares para autenticación y autorización basada en roles.
-- Usar autenticación basada en sesiones o tokens (decisión del equipo).
-- Validar datos de entrada con `Zod`.
-- Usar `PostgreSQL` para la persistencia de datos.
-- Interactuar con la base de datos utilizando la librería `pg`.
+- Implementada con `Express.js` y `TypeScript`.
+- Uso de arquitectura de 3 capas.
+- Organización de la API utilizando rutas y routers modulares.
+- Implementación de middlewares para autenticación y autorización basada en roles.
+- Uso de autenticación basada en sesiones o tokens (decisión del equipo).
+- Validación datos de entrada con `Zod`.
+- Uso `PostgreSQL` para la persistencia de datos.
+- Interación con la base de datos utilizando la librería `pg`.
 
-## Metodología de trabajo
-
-Seguiremos utilizando **GitHub Flow** para el desarrollo de las tareas.
-
-- Cada equipo será responsable de crear sus tareas en el tablero Kanban.
-- El nombre de la tarea deberá iniciar el su código de equipo, por ejemplo **T01 Nombre de tarea** para una tarea que le pertenece al equipo 1.
-- Si todos respetamos esta convención podremos usar el filtro de la parte superior para filtrar solo las tareas de nuestro equipo. Por ejemplo:
-
-<img src="https://res.cloudinary.com/dwdgpw20b/image/upload/v1693498163/illustrations/task-filter_fsxvwj.png" />
-
-## Retroalimentación
-
-Para dar por finalizado el Extended Project deberás completar el formulario de feedback para cada uno de tus compañeros de equipo y registrar la URL de su repositorio de GitHub.
-
-## Fecha de entrega
-
-**La fecha máxima de entrega es sábado a las 23:59:59 EST (media noche)**. Si tu equipo necesita tiempo adicional deberás comunicarte con tu Asistente Académico.
-
-Happy coding! 🧑‍💻🧑‍💻🧑‍💻
